@@ -1,7 +1,7 @@
 export enum AppRouteNames {
-  Login = "login",
+  Login = "/login",
   Unknown = "*",
-  Home = "home",
+  Home = "/home",
   Index = "/",
-  Register = "register",
+  Register = "/register",
 }
