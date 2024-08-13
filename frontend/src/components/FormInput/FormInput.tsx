@@ -1,4 +1,4 @@
-import { IconType } from '@/common/types'
+
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 import Input from '../Input/Input'
@@ -8,7 +8,6 @@ interface InputProps {
   type?: string
   placeholder?: string
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
-  Icon?: IconType
   className?: string
   inputClassName?: string
   errorMessage?: string
