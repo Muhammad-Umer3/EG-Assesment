@@ -1,10 +1,4 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  ObjectIdColumn,
-} from 'typeorm';
-import { PasswordTransformer } from '../transformer/password.transformer';
+import { Entity, Column, ObjectIdColumn } from 'typeorm';
 
 @Entity({
   name: 'users',
@@ -25,7 +19,6 @@ export class User {
   @Column({
     name: 'password',
     length: 255,
-    transformer: new PasswordTransformer(),
   })
   password: string;
 

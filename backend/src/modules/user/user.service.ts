@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 
 import { User } from './entity/user.entity';
 import { RegisterPayload } from '../auth';
+import { Hash } from 'src/utils/hash';
 
 @Injectable()
 export class UsersService {
@@ -35,6 +36,9 @@ export class UsersService {
       );
     }
 
-    return await this.userRepository.save(payload);
+    return await this.userRepository.save({
+      ...payload,
+      password: Hash.make(payload.password),
+    });
   }
 }
