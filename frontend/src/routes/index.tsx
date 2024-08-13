@@ -16,14 +16,15 @@ export const routesInfo: Record<AppRouteNames, RouteInfo> = {
       </Suspense>
     ),
   },
-  [AppRouteNames.Unknown]: {
-    path: AppRouteNames.Unknown,
+  [AppRouteNames.Index]: {
+    path: AppRouteNames.Index,
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <NotFound />
+        <Login />
       </Suspense>
     ),
   },
+
   [AppRouteNames.Register]: {
     path: AppRouteNames.Unknown,
     element: (
@@ -33,10 +34,18 @@ export const routesInfo: Record<AppRouteNames, RouteInfo> = {
     ),
   },
   [AppRouteNames.Home]: {
-    path: AppRouteNames.Unknown,
+    path: AppRouteNames.Home,
     element: (
       <Suspense fallback={<div>Loading...</div>}>
         <Home />
+      </Suspense>
+    ),
+  },
+  [AppRouteNames.Unknown]: {
+    path: AppRouteNames.Unknown,
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <NotFound />
       </Suspense>
     ),
   },
