@@ -7,7 +7,7 @@ const Register = lazy(() => import("../pages/Register"));
 const Home = lazy(() => import("../pages/Home"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 
-export const routesInfo: Record<AppRouteNames, RouteInfo> = {
+export const publicRoutes: Record<string, RouteInfo> = {
   [AppRouteNames.Login]: {
     path: AppRouteNames.Login,
     element: (
@@ -33,14 +33,6 @@ export const routesInfo: Record<AppRouteNames, RouteInfo> = {
       </Suspense>
     ),
   },
-  [AppRouteNames.Home]: {
-    path: AppRouteNames.Home,
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <Home />
-      </Suspense>
-    ),
-  },
   [AppRouteNames.Unknown]: {
     path: AppRouteNames.Unknown,
     element: (
@@ -48,5 +40,17 @@ export const routesInfo: Record<AppRouteNames, RouteInfo> = {
         <NotFound />
       </Suspense>
     ),
+  },
+};
+
+export const privateRoutes: Record<string, RouteInfo> = {
+  [AppRouteNames.Home]: {
+    path: AppRouteNames.Home,
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <Home />
+      </Suspense>
+    ),
+    guarded: true,
   },
 };
