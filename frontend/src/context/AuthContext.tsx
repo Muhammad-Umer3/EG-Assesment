@@ -1,15 +1,10 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  ReactNode,
-  useEffect,
-} from "react";
+import React, { createContext, useContext, useState, ReactNode } from "react";
 import { AuthResponse } from "../services/auth/types/auth.response";
 
 interface AuthContextType {
   userData?: AuthResponse;
   updateAuthInfo: (token: AuthResponse) => void;
+  logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -17,19 +12,21 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [userData, setUserData] = useState<AuthResponse>();
+  const [userData, setUserData] = useState<AuthResponse>(
+    JSON.parse(localStorage.getItem("userData") ?? "{}")
+  );
 
   const updateAuthInfo = (payload: AuthResponse) => {
     setUserData(payload);
     localStorage.setItem("userData", JSON.stringify(payload));
   };
 
-  useEffect(() => {
-    setUserData(JSON.parse(localStorage.getItem("userData") ?? "{}"));
-  }, []);
+  const logout = () => {
+    localStorage.removeItem("userData");
+  };
 
   return (
-    <AuthContext.Provider value={{ userData, updateAuthInfo }}>
+    <AuthContext.Provider value={{ userData, updateAuthInfo, logout }}>
       {children}
     </AuthContext.Provider>
   );
