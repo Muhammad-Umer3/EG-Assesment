@@ -10,9 +10,13 @@ import FormInput from "../../components/FormInput/FormInput";
 import { useLoginMutation } from "../../services/auth/auth.endpoints";
 import { LoginRequest } from "../../services/auth/types/login.request";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Link } from "react-router-dom";
+import { AppRouteNames } from "../../constants/routes";
 
 const LoginFormSchema: ZodType<LoginRequest> = z.object({
-  email: z.string({ message: "Email must be valid." }).email(),
+  email: z
+    .string({ message: "Email is required." })
+    .email({ message: "Email must be valid." }),
   password: z.string({ message: "Password is required." }),
 });
 
@@ -47,7 +51,7 @@ const LoginForm: FC = () => {
               <FormInput
                 label="Login"
                 errorMessage={errors.email?.message}
-                name="login"
+                name="email"
               />
               <FormInput
                 type="password"
@@ -58,7 +62,9 @@ const LoginForm: FC = () => {
             </div>
             <div className="flex flex-row justify-between mt-5">
               <Checkbox label="Remember me" />
-              <Anchor label="Forgot Password?" href="" />
+              <Link to={AppRouteNames.Register}>
+                <Anchor label="Register" href="" />
+              </Link>
             </div>
 
             <div className="flex justify-center align-center mt-6">
