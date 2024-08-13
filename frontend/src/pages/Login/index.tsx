@@ -10,8 +10,9 @@ import FormInput from "../../components/FormInput/FormInput";
 import { useLoginMutation } from "../../services/auth/auth.endpoints";
 import { LoginRequest } from "../../services/auth/types/login.request";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AppRouteNames } from "../../constants/routes";
+import { useAuth } from "../../context/AuthContext";
 
 const LoginFormSchema: ZodType<LoginRequest> = z.object({
   email: z
@@ -22,6 +23,10 @@ const LoginFormSchema: ZodType<LoginRequest> = z.object({
 
 const LoginForm: FC = () => {
   const [login, { isLoading }] = useLoginMutation();
+
+  const navigate = useNavigate();
+
+  const { updateAuthInfo } = useAuth();
 
   const useFormProps = useForm<LoginRequest>({
     resolver: zodResolver(LoginFormSchema),
@@ -36,14 +41,16 @@ const LoginForm: FC = () => {
   const handleLogin = async () => {
     try {
       const data = await login(getValues()).unwrap();
-      console.log(data);
+      updateAuthInfo(data);
+      navigate(AppRouteNames.Home);
+      toast.success("Login successful!");
     } catch (e: any) {
       toast.error(e.data.message);
     }
   };
 
   return (
-    <div className="flex h-full w-full justify-center items-center">
+    <div className="flex h-screen w-full justify-center items-center">
       <Card>
         <FormProvider {...useFormProps}>
           <form>

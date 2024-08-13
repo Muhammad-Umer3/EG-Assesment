@@ -4,6 +4,7 @@ interface SuccessResponse<T> {
 }
 
 interface FailResponse {
+  message: string
   success: false
   error: string
 }
