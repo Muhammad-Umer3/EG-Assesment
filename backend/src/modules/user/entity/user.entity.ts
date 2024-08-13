@@ -1,11 +1,16 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ObjectIdColumn,
+} from 'typeorm';
 import { PasswordTransformer } from '../transformer/password.transformer';
 
 @Entity({
   name: 'users',
 })
 export class User {
-  @PrimaryGeneratedColumn('uuid')
+  @ObjectIdColumn()
   id: string;
 
   @Column({ length: 255 })

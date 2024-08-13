@@ -14,7 +14,12 @@ import { TypeOrmModule, TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
       useFactory: (configService: ConfigService) => {
         return {
           type: configService.get('DB_TYPE'),
-          url: configService.get('DB_CONNECTION_URL'),
+          host: configService.get('DB_HOST'),
+          port: configService.get('DB_PORT'),
+          username: configService.get('DB_USERNAME'),
+          password: configService.get('DB_PASSWORD'),
+          database: configService.get('DB_DATABASE'),
+          authSource: 'admin',
           entities: [__dirname + './../**/**.entity{.ts,.js}'],
           migrations: [__dirname + '../migrations/*{.ts,.js}'],
           synchronize: configService.get('DB_SYNC') === 'true',
