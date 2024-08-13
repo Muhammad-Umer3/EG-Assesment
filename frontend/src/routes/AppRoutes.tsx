@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { routesInfo } from '.'
-import { AppRouteNames } from '@/constants/routes'
+import { AppRouteNames } from "../constants/routes";
 
 const AppRoutes: FC = () => {
   return (
